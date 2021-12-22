@@ -1,11 +1,13 @@
 <div class='container'>
   <div class='row'>
+    
     <div class='col-md-3'>
       <h2>User info</h2>
       <%= render 'users/info' %>
       <h2 class="mt-3">New book</h2>
       <%= render 'books/form', book: @book %>
     </div>
+    
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
   		<table class='table'>
@@ -17,6 +19,18 @@
           </td>
           <td><%= link_to @books.title, book_path(@books) %></td>
           <td><%= @books.body %></td>
+          
+          <% if @books.favorited_by?(current_user) %>
+          <td><%= link_to book_favorites_path(@books.id), method: :delete do %>
+              ♥<%= @books.favorites.count %> いいね</td>
+              <% end %>
+          <% else %>
+           <td><%= link_to book_favorites_path(@books.id), method: :post do %>
+             ♡<%= @books.favorites.count %> いいね</td>
+              <% end %>
+          <% end %>
+          
+          <td>コメント数</td>
           <% if @books.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@books), class: "btn btn-sm btn-success edit_book_#{@books.id}" %></td>
           <td><%= link_to 'Destroy', book_path(@books), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
@@ -24,5 +38,6 @@
         </tr>
       </table>
     </div>
+    
   </div>
 </div>

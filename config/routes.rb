@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   get '/users' => "users#index"
   get "users/:id" => "users#show", as: :mypage
   resources :users,only: [:show,:index,:edit,:update]
-  resources :books
+  resources :books do
+    resource :favorites, only: [:create, :destroy]
+    resources :book_comments, only: [:create, :destroy]
+  end
  
   
 end
