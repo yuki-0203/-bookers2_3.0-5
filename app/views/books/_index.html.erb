@@ -26,8 +26,7 @@
              ♡<%= book.favorites.count %> いいね</td>
             <% end %>
          <% end %>
-       
-        <td>コメント数</td>
+        <td><%= link_to "#{book.book_comments.count} コメント", book_path(book) %></td>
       </tr>
     <% end %>
   </tbody>
