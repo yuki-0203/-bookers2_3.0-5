@@ -1,14 +1,6 @@
 <div class="container">
   <div class="col-xs-12">
     <% if @model == "user" %>
-     <% if user_signed_in? %>
-        <%= form_with url:search_path, method: :get, local: true do |f| %>
-          <%= f.text_field 'search[value]' %>
-          <%= f.select 'search[model]', options_for_select({ "User" => "user", "Book" => "book" }) %>
-          <%= f.select 'search[how]', options_for_select({ "完全一致" => "match",  "部分一致" => "partical"  }) %>
-          <%= f.submit :"検索" %>
-        <% end %>
-      <% end %>
     <h2>Users search for '<%= @value %>'</h2>
     <table class="table">
         <thead>
@@ -33,7 +25,8 @@
             </tr>
         </tbody>
     <% end %>
-    <% elsif @model == "book" %>
+    
+    <% elsif  @model == "book" %>
     <h2>Books search for '<%= @value %>'</h2>
     <table class="table">
         <thead>
